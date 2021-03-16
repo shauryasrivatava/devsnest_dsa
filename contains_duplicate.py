@@ -1,12 +1,14 @@
 class Solution(object):
     def containsDuplicate(self, nums):
         
+        #via brute force time complexity O(n^2)
         # for i in range (len(nums)):
         #     for j in range (len(nums)):
         #         if (i!=j and nums[i]==nums[j]):
         #             return True
         # return False
         
+        #via sorting
         # nums.sort()
         # for i in range (1,len(nums)):
         #     if nums[i-1]== nums[i]:
@@ -14,6 +16,7 @@ class Solution(object):
         # return False  
         
         # return len(nums)!=len(set(nums))
+        
         #via hashing
         d={}
         for i in nums:
