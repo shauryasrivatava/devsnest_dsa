@@ -1,2 +1,2 @@
 # devsnest_dsa
-problem solving at DSA
+problem solving at leetcode
