@@ -1,36 +1,25 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-def dll(root):
-    if root is None:
-        return None,None
-    lh,lt=dll(root.left)
-    rh,rt=dll(root.right)
-    if lh:
-        h=lh
-        lt.right=root
-        root.left=lt
-    else:
-        h=root
-    if rh:
-        t=rt
-        rh.left=root
-        root.right=rh
-    else:
-        t=root
-    return h,t
 class Solution:
-    def findTarget(self, root: TreeNode, k: int) -> bool:
-        h,t=dll(root)
-        while h.val!=t.val:
-            summ=h.val+t.val
-            if summ==k:
-                return True
-            elif summ>k:
-                t=t.left
-            elif summ<k:
-                h=h.right
-        return False
+    def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+        if not root:
+            return None
+        if root.val==key:
+            #1st case- both children absent
+            if not root.left and not root.right:
+                return None
+            #2nd case- One child present only
+            if not root.left and root.right:
+                return root.right
+            if root.left and not root.right:
+                return root.left
+            #3rd case- Both left and right child present
+            p=root.left
+            while p.right:
+                p=p.right
+            root.val=p.val
+            root.left=self.deleteNode(root.left,root.val)
+            
+        elif root.val>key:
+            root.left=self.deleteNode(root.left,key)
+        else:
+            root.right=self.deleteNode(root.right,key)
+        return root
